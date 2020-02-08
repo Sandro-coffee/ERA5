@@ -1,3 +1,16 @@
-cdo yearsum -selmon,9,10,11,12 -shifttime,-2mo prec_nov-mar_dec.grib sum_series.grib # -2mon to get into same year
+ 
+ #####################. ERA% in nc
+ 
+cdo infon ERA5_prec_nov_mar.nc
 
-cdo infon input output
+#### create sum of months
+
+cdo -b F64 yearsum -selmon,8,9,10,11,12 -shifttime,-3mo ERA5_prec_nov_mar.nc sum_series.nc
+
+cdo yseasstd sum_series.nc std_series.nc # multi-year seasonal std dev
+
+ x 1000 in Qgis to get to mm
+ 
+ ## calcuate multi year seasonal mean to then calc CV in Qgis
+ 
+ cdo yseasmean sum_series.grib mean_series.nc
