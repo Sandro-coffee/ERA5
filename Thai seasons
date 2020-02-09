@@ -14,3 +14,32 @@ cdo yseasstd sum_series.nc std_series.nc # multi-year seasonal std dev
  ## calcuate multi year seasonal mean to then calc CV in Qgis
  
  cdo yseasmean sum_series.grib mean_series.nc
+
+
+
+############### ERA5 temp prec for 2012-2013
+
+## Create totals for 2012 & 2013 and sum in Qgis to get seasonal total
+
+cdo -b F64 -yearsum -selmon,11,12 -selyear,2012 -selname,tp era5_prec_temp_season_2012-2013.nc tot_prec_2012_seas.nc
+cdo -b F64 -yearsum -selmon,1,2,3 -selyear,2013 -selname,tp era5_prec_temp_season_2012-2013.nc tot_prec_2013_seas.nc
+
+
+## TEmp
+
+# Convert to C
+cdo -b F64 addc,-273.15 era5_prec_temp_season_2012-2013.nc era5_tempC.nc
+
+## 2012 & 13 
+cdo -b F64 -yearmean -selmon,11,12 -selyear,2012 -selname,t2m  era5_tempC.nc mean_temp_2012_seas.nc
+cdo -b F64 -yearmean -selmon,1,2,3 -selyear,2013 -selname,t2m  era5_tempC.nc mean_temp_2013_seas.nc
+
+
+## Soil T
+
+# Convert to C
+cdo -b F64 addc,-273.15 era5_soilT_2018_seas.nc era5_soilC.nc
+
+## 2018
+cdo -b F64 -yearmean -selname,stl2  era5_soilC.nc soilC_2012.nc
+
