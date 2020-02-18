@@ -1,0 +1,14 @@
+## Convert to C
+
+cdo -b F64 addc,-273.15 ERA5_T_monthly_0400am.nc era5_Tc_0400.nc
+
+## short info
+
+cdo sinfon era5_Tc_0400.nc
+
+## create multi-year monthly standard deviation
+
+cdo ymonstd era5_Tc_0400.nc era5_std_Tc_0400.nc
+
+## view it
+
