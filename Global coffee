@@ -12,3 +12,10 @@ cdo ymonstd era5_Tc_0400.nc era5_std_Tc_0400.nc
 
 ## view it
 
+## Vertical mean For every gridpoint the mean over all levels is computed.
+
+cdo vertmean era5_Tc_0400.nc era5_Tc_0400_vmean.nc
+
+## time Time standard deviation
+
+cdo timstd era5_Tc_0400.nc era5_Tc_0400_alltime_std.nc
